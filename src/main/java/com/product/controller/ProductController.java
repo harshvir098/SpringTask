@@ -16,21 +16,23 @@ import com.product.service.ProductService;
 
 @RestController
 public class ProductController {
+	
+	/*harsh*/
 
 	@Autowired
 	private ProductService productService;
 
-	@PostMapping("/food")
+	@PostMapping("/product")
 	public ResponseEntity<?> saveProduct(@RequestBody Product product) {
 		return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/showfood")
+	@GetMapping("/get-products")
 	public ResponseEntity<?> getProducts() {
 		return new ResponseEntity<>(productService.getAllProduct(), HttpStatus.OK);
 	}
 
-	@GetMapping("/showfoodbyid/{id}")
+	@GetMapping("/get-product/{id}")
 	public ResponseEntity<?> getProduct(@PathVariable int id) {
 		Product productById = productService.getProductById(id);
 		if (productById != null) {
@@ -41,12 +43,12 @@ public class ProductController {
 
 	}
 
-	@PutMapping("/updatefood/{id}")
+	@PutMapping("/update-product/{id}")
 	public ResponseEntity<?> updateProduct(@PathVariable(name = "id") int id, @RequestBody Product product) {
 		return new ResponseEntity<>(productService.updateProduct(id, product), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/deletefood/{id}")
+	@DeleteMapping("/delete-product/{id}")
 	public ResponseEntity<?> deleteProduct(@PathVariable int id) {
 		Boolean deleteProduct = productService.deleteProduct(id);
 		if (deleteProduct) {
